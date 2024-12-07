@@ -81,4 +81,15 @@ class NotesWindow(QtWidgets.QMainWindow):
                 self.save_to_file()
         else:
             QtWidgets.QMessageBox.warning(self, "Помилка", "Замітка для додавання тега не обрана!")
-
+    def del_tag(self):
+        if self.ui.listWidget_2.curretItem():
+            key = self.ui.listWidget.currentItem().text()
+            tag = self.ui.listWidget_2.curretItem().text()
+            self.notes[key]['теги'].remove(tag)
+            self.ui.listWidget_2.clear()
+            self.ui.listWidget_2.addItems(self.notes[key]["теги"])
+            self.save_to_file()
+        else:
+            QtWidgets.QMessageBox.warning(
+                self, "Помилка", "Теги для видалення не обраний!")
+            
